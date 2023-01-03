@@ -2,5 +2,4 @@
 import add_0
 a = 1
 b = 2
-s = add(a, b)
-print(a, "+", b, "=", s)
+print(a, "+", b, "=", add(a, b))
