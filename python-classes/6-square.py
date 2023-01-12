@@ -2,7 +2,6 @@
 """creating class"""
 
 
-
 class Square:
     """Square with private instance attribute and instantiation"""
 
