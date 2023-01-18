@@ -4,9 +4,7 @@
 
 def read_file(filename=""):
     """Defining function"""
-
-
     if filename:
-        with open("filename", mode="r", encoding=utf-8) as f:
+        with open(filename, mode='r', encoding="utf-8") as f:
         print(f.read())
 
