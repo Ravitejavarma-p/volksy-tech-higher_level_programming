@@ -6,6 +6,7 @@ def read_file(filename=""):
     """Defining function"""
 
 
-    with open("filename", mode="r", encoding=utf-8) as f:
+    if filename:
+        with open("filename", mode="r", encoding=utf-8) as f:
         print(f.read())
 
