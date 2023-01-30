@@ -1,2 +1,2 @@
--- displays the records with id
-SELECT * FROM first_table WHERE id=89;
+-- displays the records with id=89
+SELECT COUNT(*) FROM first_table WHERE id=89;
