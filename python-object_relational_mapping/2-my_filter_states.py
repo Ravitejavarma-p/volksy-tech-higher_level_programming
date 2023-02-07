@@ -9,5 +9,6 @@ if __name__ == "__main__":
     db = MySQLdb.connect(user=sys.argv[1], passwd=sys.argv[2], db=sys.argv[3])
     c = db.cursor()
     c.execute("SELECT * FROM STATES WHERE BINARY name = '{}'".format(sys.argv[4]))
-    for i in c:
+    s = c.fetchall()
+    for i in s:
         print(i)
