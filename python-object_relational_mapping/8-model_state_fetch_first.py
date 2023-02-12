@@ -1,28 +1,24 @@
 #!/usr/bin/python3
-"""List first State objects from db"""
-import sys
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
+"""
+Script to list all states in the states table.
+"""
+from sqlalchemy.orm import sessionmaker
 from model_state import Base, State
+from sqlalchemy import (create_engine)
+import sys
 
 
-def list_first_state_obj():
-    engine = create_engine("mysql+mysqldb://{}:{}@localhost/{}"
+if __name__ == "__main__":
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
                            .format(sys.argv[1], sys.argv[2], sys.argv[3]),
                            pool_pre_ping=True)
     Base.metadata.create_all(engine)
 
-    session = Session(engine)
+    Session = sessionmaker(bind=engine)
+    session = Session()
 
-    f = session.query(State).first()
-
-    if f:
-        print("{}: {}".format(f.__dict__['id'], f.__dict__['name']))
-    else:
+    state = session.query(State).first()
+    if state is None:
         print("Nothing")
-
-    session.close()
-
-
-if __name__ == "__main__":
-    list_first_state_obj()
+    else:
+        print(f"{state.id}: {state.name}")
