@@ -1,26 +1,26 @@
 #!/usr/bin/python3
-"""Inserts into State obj from db"""
-import sys
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
+"""
+Script to list all states in the states table.
+"""
+from sqlalchemy.orm import sessionmaker
 from model_state import Base, State
+from sqlalchemy import (create_engine)
+import sys
 
 
-def insert_to_state_obj():
-    engine = create_engine("mysql+mysqldb://{}:{}@localhost/{}"
+if __name__ == "__main__":
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
                            .format(sys.argv[1], sys.argv[2], sys.argv[3]),
                            pool_pre_ping=True)
     Base.metadata.create_all(engine)
 
-    session = Session(engine)
-    state = State(name='Louisiana')
+    Session = sessionmaker(bind=engine)
+    session = Session()
 
-    session.add(state)
-    session.commit()
+    session.add(State(name="Louisiana"))
+    state = session.query(State)\
+        .filter(State.name == "Louisiana")\
+        .order_by(State.id)[-1]
     print(state.id)
 
-    session.close()
-
-
-if __name__ == "__main__":
-    insert_to_state_obj()
+    session.commit()
